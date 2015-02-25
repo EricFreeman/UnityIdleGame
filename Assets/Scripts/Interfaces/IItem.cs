@@ -2,9 +2,9 @@
 {
     public interface IItem
     {
-        string Name { get; set; }
-        float Price { get; set; }
-        float PriceIncrease { get; set; }
-        float MoneyPerSecond { get; set; }
+        string Name { get; }
+        float MoneyPerSecond { get; }
+        float Price { get; }
+        float PriceIncrease { get; }
     }
 }
