@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Directors
 {
-    public class UpgradeDirector : MonoBehaviour
+    public class ItemDirector : MonoBehaviour
     {
         private List<IItem> _itemList = new List<IItem>(); 
 
