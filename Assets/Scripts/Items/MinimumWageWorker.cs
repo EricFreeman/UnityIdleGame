@@ -1,8 +1,8 @@
 ﻿using Assets.Scripts.Interfaces;
 
-namespace Assets.Scripts.Upgrades
+namespace Assets.Scripts.Items
 {
-    class MinimumWageWorker : IItem
+    public class MinimumWageWorker : IItem
     {
         public string Name
         {
