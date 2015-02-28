@@ -14,8 +14,8 @@ namespace Assets.Scripts.Directors
 
         void Start()
         {
-            PopulateUpgrades();
-            AddUpgradesToUi();
+            PopulateItems();
+            AddItemsToUi();
         }
 
         void Update()
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Directors
             
         }
 
-        private void PopulateUpgrades()
+        private void PopulateItems()
         {
             Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => type.GetInterface("IItem") != null && !type.IsInterface)
@@ -34,7 +34,7 @@ namespace Assets.Scripts.Directors
                 });
         }
 
-        private void AddUpgradesToUi()
+        private void AddItemsToUi()
         {
             
         }
