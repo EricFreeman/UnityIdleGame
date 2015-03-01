@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Assets.Scripts.Interfaces;
+using Assets.Scripts.Items;
 using Assets.Scripts.Util;
 using UnityEngine;
 
@@ -10,7 +11,9 @@ namespace Assets.Scripts.Directors
 {
     public class ItemDirector : MonoBehaviour
     {
-        private List<IItem> _itemList = new List<IItem>(); 
+        private List<IItem> _itemList = new List<IItem>();
+
+        public GameObject ItemPrefab;
 
         void Start()
         {
@@ -31,6 +34,9 @@ namespace Assets.Scripts.Directors
                 {
                     var obj = (IItem)Activator.CreateInstance(item);
                     _itemList.Add(obj);
+
+                    var itemPrefab = Instantiate(ItemPrefab);
+                    itemPrefab.GetComponent<Item>().Setup(obj);
                 });
         }
 
