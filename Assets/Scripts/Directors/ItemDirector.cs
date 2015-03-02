@@ -13,6 +13,7 @@ namespace Assets.Scripts.Directors
     {
         private List<IItem> _itemList = new List<IItem>();
 
+        public Transform ItemsPanel;
         public GameObject ItemPrefab;
 
         void Start()
@@ -37,6 +38,8 @@ namespace Assets.Scripts.Directors
 
                     var itemPrefab = Instantiate(ItemPrefab);
                     itemPrefab.GetComponent<Item>().Setup(obj);
+
+                    itemPrefab.transform.SetParent(ItemsPanel, false);
                 });
         }
 
