@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Interfaces;
+using Assets.Scripts.Messages;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEventAggregator;
 
 namespace Assets.Scripts.Items
 {
@@ -19,6 +21,14 @@ namespace Assets.Scripts.Items
             ItemName.text = item.Name;
             ItemPrice.text = item.Price.ToString("C");
             ItemMps.text = item.MoneyPerSecond.ToString("C");
+        }
+
+        public void Buy()
+        {
+            EventAggregator.SendMessage(new BuyItemMessage
+            {
+                Item = _item
+            });
         }
     }
 }

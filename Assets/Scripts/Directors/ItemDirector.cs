@@ -19,7 +19,6 @@ namespace Assets.Scripts.Directors
         void Start()
         {
             PopulateItems();
-            AddItemsToUi();
         }
 
         void Update()
@@ -41,11 +40,6 @@ namespace Assets.Scripts.Directors
 
                     itemPrefab.transform.SetParent(ItemsPanel, false);
                 });
-        }
-
-        private void AddItemsToUi()
-        {
-            
         }
     }
 }
