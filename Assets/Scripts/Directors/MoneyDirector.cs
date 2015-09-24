@@ -1,19 +1,42 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Items;
+using Assets.Scripts.Models;
+using Assets.Scripts.Upgrades.MinimumWageWorkerUpgrades;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Directors
 {
     public class MoneyDirector : MonoBehaviour
     {
-        public float MoneyPerSecond = 1;
-        public float CurrentMoney = 0;
+        public float CachedMoneyPerSecond = PlayerContext.GetMoneyPerSecond();
 
         public Text MoneyText;
 
+        void Start()
+        {
+            PlayerContext.OwnedItems = new List<OwnedItems>
+            {
+                new OwnedItems
+                {
+                    Item = new MinimumWageWorker(),
+                    Amount = 1
+                }
+            };
+
+            PlayerContext.OwnedUpgrades = new List<IUpgrade>
+            {
+                new PositiveReinforcement()
+            };
+
+            CachedMoneyPerSecond = PlayerContext.GetMoneyPerSecond();
+        }
+
         void Update()
         {
-            CurrentMoney += MoneyPerSecond;
-            MoneyText.text = CurrentMoney.ToString("C");
+            PlayerContext.CurrentMoney += CachedMoneyPerSecond;
+            MoneyText.text = PlayerContext.CurrentMoney.ToString("C");
         }
     }
 }

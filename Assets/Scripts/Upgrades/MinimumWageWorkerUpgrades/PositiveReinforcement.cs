@@ -7,8 +7,8 @@ namespace Assets.Scripts.Upgrades.MinimumWageWorkerUpgrades
     public class PositiveReinforcement : IUpgrade
     {
         public string Name { get { return "Positive Reinforcement"; } }
-        public float Price { get; private set; }
-        public float UpgradeAmount { get; set; }
+        public float Price { get { return 50; } }
+        public float UpgradeAmount { get { return 1; } }
         public UpgradeType UpgradeType { get; set; }
         
         public IItem Item { get { return new MinimumWageWorker(); } }
