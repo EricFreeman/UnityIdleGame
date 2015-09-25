@@ -15,6 +15,8 @@ namespace Assets.Scripts.Models
         public static List<OwnedItems> OwnedItems = new List<OwnedItems>();
         public static List<IUpgrade> OwnedUpgrades = new List<IUpgrade>();
 
+        #region MoneyPerSecond
+
         public static float GetMoneyPerSecond()
         {
             return OwnedItems.Aggregate(0f, (accumulator, item) => GetMoneyPerSecondForItem(item)); ;
@@ -34,6 +36,19 @@ namespace Assets.Scripts.Models
                 .Aggregate(0f, (accumulator, upgrade) => upgrade.UpgradeAmount);
 
             return baseMps + mpsIncrease;
+        }
+
+        #endregion
+
+        public static void BuyItem(IItem item)
+        {
+            CurrentMoney -= item.Price;
+            var ownedItem = OwnedItems.FirstOrDefault(x => x.Item.Name == item.Name);
+
+            if (ownedItem != null)
+            {
+                ownedItem.Amount++;
+            }
         }
     }
 }

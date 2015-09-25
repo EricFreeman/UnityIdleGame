@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Items;
+using Assets.Scripts.Messages;
 using Assets.Scripts.Models;
 using Assets.Scripts.Upgrades.MinimumWageWorkerUpgrades;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEventAggregator;
 
 namespace Assets.Scripts.Directors
 {
-    public class MoneyDirector : MonoBehaviour
+    public class MoneyDirector : MonoBehaviour, IListener<BuyItemMessage>
     {
         public float CachedMoneyPerSecond = PlayerContext.GetMoneyPerSecond();
 
@@ -31,12 +33,25 @@ namespace Assets.Scripts.Directors
             };
 
             CachedMoneyPerSecond = PlayerContext.GetMoneyPerSecond();
+
+            this.Register<BuyItemMessage>();
+        }
+
+        void OnDestory()
+        {
+            this.UnRegister<BuyItemMessage>();
         }
 
         void Update()
         {
             PlayerContext.CurrentMoney += CachedMoneyPerSecond;
             MoneyText.text = PlayerContext.CurrentMoney.ToString("C");
+        }
+
+        public void Handle(BuyItemMessage message)
+        {
+            PlayerContext.BuyItem(message.Item);
+            CachedMoneyPerSecond = PlayerContext.GetMoneyPerSecond();
         }
     }
 }
