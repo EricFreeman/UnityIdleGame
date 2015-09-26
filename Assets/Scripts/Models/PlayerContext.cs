@@ -12,7 +12,7 @@ namespace Assets.Scripts.Models
         public static float CurrentMoney;
         public static float TotalMoneyEarned;
 
-        public static List<OwnedItems> OwnedItems = new List<OwnedItems>();
+        public static List<OwnedItem> OwnedItems = new List<OwnedItem>();
         public static List<IUpgrade> OwnedUpgrades = new List<IUpgrade>();
 
         #region MoneyPerSecond
@@ -22,12 +22,17 @@ namespace Assets.Scripts.Models
             return OwnedItems.Aggregate(0f, (accumulator, item) => GetMoneyPerSecondForItem(item)); ;
         }
 
-        private static float GetMoneyPerSecondForItem(OwnedItems item)
+        public static OwnedItem GetItem(IItem item)
+        {
+            return OwnedItems.FirstOrDefault(x => x.Item.Name == item.Name);
+        }
+
+        public static float GetMoneyPerSecondForItem(OwnedItem item)
         {
             return item.Item.MoneyPerSecond * item.Amount;
         }
 
-        private static float GetMoneyPerSecondForItem(IItem item)
+        public static float GetMoneyPerSecondForItem(IItem item)
         {
             var baseMps = item.MoneyPerSecond;
             var upgradesForItem = OwnedUpgrades.Where(x => x.Item == item).ToList();
@@ -43,7 +48,7 @@ namespace Assets.Scripts.Models
         public static void BuyItem(IItem item)
         {
             CurrentMoney -= item.Price;
-            var ownedItem = OwnedItems.FirstOrDefault(x => x.Item.Name == item.Name);
+            var ownedItem = GetItem(item);
 
             if (ownedItem != null)
             {

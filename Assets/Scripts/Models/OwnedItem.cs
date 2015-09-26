@@ -2,7 +2,7 @@ using Assets.Scripts.Interfaces;
 
 namespace Assets.Scripts.Models
 {
-    public class OwnedItems
+    public class OwnedItem
     {
         public IItem Item;
         public int Amount;

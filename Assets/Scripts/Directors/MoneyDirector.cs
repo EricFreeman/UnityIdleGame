@@ -18,9 +18,9 @@ namespace Assets.Scripts.Directors
 
         void Start()
         {
-            PlayerContext.OwnedItems = new List<OwnedItems>
+            PlayerContext.OwnedItems = new List<OwnedItem>
             {
-                new OwnedItems
+                new OwnedItem
                 {
                     Item = new MinimumWageWorker(),
                     Amount = 1
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Directors
 
         void Update()
         {
-            PlayerContext.CurrentMoney += CachedMoneyPerSecond;
+            PlayerContext.CurrentMoney += CachedMoneyPerSecond * Time.deltaTime;
             MoneyText.text = PlayerContext.CurrentMoney.ToString("C");
         }
 
